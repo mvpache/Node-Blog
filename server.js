@@ -7,15 +7,22 @@ const logger = (req, res, next) => {
   //could even alter url before it gets sent
 }
 
+
+const userRouter = require('./routes/userRoute.js')
+
 const server = express();
+
 
 server.use(helmet());
 server.use(express.json());
 server.use(logger);
 
+server.use('/users', userRouter);
+
 server.get('/', function (req, res) {
   res.send({ api: 'Running...' });
 });
+
 
 const port = 5000;
 server.listen(port, () => console.log('Running on port 5000'));
